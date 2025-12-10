@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Blog App</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Quill.js Rich Text Editor -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1> Blog App</h1>
+            <button class="btn btn-primary" onclick="showCreateForm()">+ New Post</button>
+        </header>
+
+        <!-- Notification Toast -->
+        <div id="notification" class="notification" style="display: none;">
+            <span id="notificationMessage"></span>
+            <button class="notification-close" onclick="hideNotification()">×</button>
+        </div>
+
+        <div id="createForm" class="form-container" style="display: none;">
+            <h2>Create New Post</h2>
+            <form id="createPostForm">
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="author">Author:</label>
+                    <input type="text" id="author" name="author" placeholder="Enter author name">
+                </div>
+                <div class="form-group">
+                    <label for="content">Content:</label>
+                    <div id="contentEditor" style="height: 200px;"></div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Create Post</button>
+                    <button type="button" class="btn btn-secondary" onclick="hideCreateForm()">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="editForm" class="form-container" style="display: none;">
+            <h2>Edit Post</h2>
+            <form id="editPostForm">
+                <input type="hidden" id="editId">
+                <div class="form-group">
+                    <label for="editTitle">Title:</label>
+                    <input type="text" id="editTitle" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="editAuthor">Author:</label>
+                    <input type="text" id="editAuthor" name="author" placeholder="Enter author name">
+                </div>
+                <div class="form-group">
+                    <label for="editContent">Content:</label>
+                    <div id="editContentEditor" style="height: 200px;"></div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Update Post</button>
+                    <button type="button" class="btn btn-secondary" onclick="hideEditForm()">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="postDetails" class="post-details" style="display: none;">
+            <button class="btn btn-secondary" onclick="hidePostDetails()">← Back to List</button>
+            <div id="postContent"></div>
+        </div>
+
+        <div id="postsList">
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="🔍 Search posts by title, content, or author..." onkeyup="handleSearch()">
+                    <button class="btn btn-secondary" id="clearSearchBtn" onclick="clearSearch()" style="display: none;">Clear</button>
+                </div>
+                <div id="searchResultsInfo" style="display: none;"></div>
+            </div>
+            <div class="pagination-controls">
+                <button id="prevBtn" class="btn btn-secondary" onclick="changePage(-1)">Previous</button>
+                <span id="pageInfo">Page 1 of 1</span>
+                <button id="nextBtn" class="btn btn-secondary" onclick="changePage(1)">Next</button>
+            </div>
+            <div id="postsContainer"></div>
+        </div>
+    </div>
+
+    <!-- Quill.js Rich Text Editor -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+
