@@ -6,7 +6,7 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const DATA_FILE = path.join(__dirname, 'data', 'posts.json');
 const UPLOADS_DIR = path.join(__dirname, 'public', 'uploads');
 
@@ -117,6 +117,7 @@ app.get('/api/posts/:id', (req, res) => {
     return res.status(404).json({ error: 'Post not found' });
   }
   
+  
   res.json(post);
 });
 
@@ -164,7 +165,7 @@ app.put('/api/posts/:id', (req, res) => {
     ...posts[postIndex],
     title: title.trim(),
     content: content.trim(),
-    author: author ? author.trim() : (posts[postIndex].author || 'Anonymous'),
+    author: author ? author.trim() : (posts[postIndex].author || 'Anonymous'), //need to add html sanitization
     updatedAt: new Date().toISOString()
   };
 
@@ -181,7 +182,7 @@ app.delete('/api/posts/:id', (req, res) => {
     return res.status(404).json({ error: 'Post not found' });
   }
 
-  const deletedPost = posts.splice(postIndex, 1)[0];
+  const deletedPost = posts.splice(postIndex, 1)[0];  //one who writes should be able to delete
   writePosts(posts);
 
   res.json({ message: 'Post deleted successfully', post: deletedPost });
