@@ -15,12 +15,6 @@
             <button class="btn btn-primary" onclick="showCreateForm()">+ New Post</button>
         </header>
 
-        <!-- Notification Toast -->
-        <div id="notification" class="notification" style="display: none;">
-            <span id="notificationMessage"></span>
-            <button class="notification-close" onclick="hideNotification()">×</button>
-        </div>
-
         <div id="createForm" class="form-container" style="display: none;">
             <h2>Create New Post</h2>
             <form id="createPostForm">
@@ -71,6 +65,12 @@
             <div id="postContent"></div>
         </div>
 
+        <!-- Notification Toast -->
+        <div id="notification" class="notification" style="display: none;">
+            <span id="notificationMessage"></span>
+            <button class="notification-close" onclick="hideNotification()">×</button>
+        </div>
+
         <div id="postsList">
             <div class="search-container">
                 <div class="search-box">
@@ -90,7 +90,7 @@
 
     <!-- Quill.js Rich Text Editor -->
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-    <script src="app-client.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
 
